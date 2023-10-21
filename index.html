@@ -44,20 +44,20 @@
         const btnCleanName = document.getElementById('btnCleanName');
         const btnCleanSurName = document.getElementById('btnCleanSurName');
 
-        /* Очистить поле "Полное Имя"*/
+        /* Очистить поле "Полное Имя" */
         btnCleanName.addEventListener('click', function (event) {
             event.preventDefault();
             clearFormField(secondForm, 'fullName');
         });
 
-        /* Очистить поле "Фамилия"*/
+        /* Очистить поле "Фамилия" */
         btnCleanSurName.addEventListener('click', function (event) {
             event.preventDefault();
             clearFormField(secondForm, 'surName');
         });
 
 
-        /* Функция очищает значение поля ввода  */
+        /* Функция очищает значение поля ввода */
         function clearFormField(form, fieldName) {
             if (form && form.elements[fieldName]) {
                 form.elements[fieldName].value = '';
