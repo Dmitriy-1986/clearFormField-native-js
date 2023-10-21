@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <h2>Form 1</h2>
+    <form>
+        <input type="text" name="search" placeholder="Поиск">
+        <button id="btnClean">Очистить</button>
+    </form>
+
+    <h2>Form 2</h2>
+    <form>
+        <input type="text" name="fullName" placeholder="Полное Имя">
+        <input type="text" name="surName" placeholder="Фамилия">
+        <button id="btnCleanName">Очистить Полное Имя</button>
+        <button id="btnCleanSurName">Очистить Фамилию</button>
+    </form>
+
+    <script>
+        /* Форма 1 */
+        const firstForm = document.forms[0];
+        const btnCleansSearchFieald = document.getElementById('btnClean');
+
+        btnCleansSearchFieald.addEventListener('click', (event) => {
+            event.preventDefault();
+            clearFormField(document.forms[0], 'search');
+        });
+
+        /* Форма 2 */
+        const secondForm = document.forms[1];
+        const btnCleanName = document.getElementById('btnCleanName');
+        const btnCleanSurName = document.getElementById('btnCleanSurName');
+
+        /* Очистить поле "Полное Имя"*/
+        btnCleanName.addEventListener('click', function (event) {
+            event.preventDefault();
+            clearFormField(secondForm, 'fullName');
+        });
+
+        /* Очистить поле "Полное Фамилия"*/
+        btnCleanSurName.addEventListener('click', function (event) {
+            event.preventDefault();
+            clearFormField(secondForm, 'surName');
+        });
+
+
+        /* Функция очищает значение поля ввода  */
+        function clearFormField(form, fieldName) {
+            if (form && form.elements[fieldName]) {
+                form.elements[fieldName].value = '';
+            }
+        }
+    </script>
+
+</body>
+
+</html>
