@@ -9,7 +9,9 @@
     <title>Document</title>
 
     <style>
-
+        .hidden {
+            opacity: 0;
+        }
     </style>
 </head>
 
@@ -17,52 +19,50 @@
 
     <h2>Form 1</h2>
     <form>
-        <input type="text" name="search" placeholder="Поиск">
-        <button id="btnClean">Очистить</button>
+        <input type="text" name="search" placeholder="Поиск" class="inputWithClear">
+        <button class="clearButton hidden">Очистить</button>
     </form>
 
     <h2>Form 2</h2>
     <form>
-        <input type="text" name="fullName" placeholder="Полное Имя">
-        <input type="text" name="surName" placeholder="Фамилия">
-        <button id="btnCleanName">Очистить Полное Имя</button>
-        <button id="btnCleanSurName">Очистить Фамилию</button>
+        <p>
+            <input type="text" name="fullName" placeholder="Полное Имя" class="inputWithClear">
+            <button class="clearButton hidden">Очистить Полное Имя</button>
+        </p>
+        <p>
+            <input type="text" name="surName" placeholder="Фамилия" class="inputWithClear">
+            <button class="clearButton hidden">Очистить Фамилию</button>
+        </p>
     </form>
 
     <script>
-        /* Форма 1 */
-        const firstForm = document.forms[0];
-        const btnCleansSearchFieald = document.getElementById('btnClean');
-
-        btnCleansSearchFieald.addEventListener('click', (event) => {
-            event.preventDefault();
-            clearFormField(document.forms[0], 'search');
-        });
-
-        /* Форма 2 */
-        const secondForm = document.forms[1];
-        const btnCleanName = document.getElementById('btnCleanName');
-        const btnCleanSurName = document.getElementById('btnCleanSurName');
-
-        /* Очистить поле "Полное Имя" */
-        btnCleanName.addEventListener('click', function (event) {
-            event.preventDefault();
-            clearFormField(secondForm, 'fullName');
-        });
-
-        /* Очистить поле "Фамилия" */
-        btnCleanSurName.addEventListener('click', function (event) {
-            event.preventDefault();
-            clearFormField(secondForm, 'surName');
-        });
-
-
-        /* Функция очищает значение поля ввода */
-        function clearFormField(form, fieldName) {
-            if (form && form.elements[fieldName]) {
-                form.elements[fieldName].value = '';
+        function updateButtonVisibility(input) {
+            const button = input.nextElementSibling;
+            if (input.value.length <= 1) {
+                button.classList.add('hidden');
+            } else {
+                button.classList.remove('hidden');
             }
         }
+
+        function clearField(input) {
+            input.value = '';
+            updateButtonVisibility(input);
+        }
+
+        const inputWithClear = document.querySelectorAll('.inputWithClear');
+
+        inputWithClear.forEach(item => {
+            item.addEventListener('input', () => {
+                updateButtonVisibility(item);
+            });
+
+            const clearButton = item.nextElementSibling;
+            clearButton.addEventListener('click', (event) => {
+                event.preventDefault();
+                clearField(item);
+            });
+        });
     </script>
 
 </body>
